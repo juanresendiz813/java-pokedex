@@ -7,44 +7,13 @@
     <body>
     <h1 th:text="${pageTitle}"></h1>
         <form th:action="@{/Pokemon}" th:object="${pokemon}" method="post">
-<!--            <div>-->
-<!--                <label>Employee Id</label>-->
-<!--                <input type="text" th:field="*{id}" placeholder="pokemon id">-->
-<!--            </div>-->
             <div>
                 <label>Enter Pokemon Name:</label>
                 <input type="text" th:field="*{name}" placeholder="Name">
             </div>
-<!--            <div>-->
-<!--                <label>Department</label>-->
-<!--                <select th:field="*{department}">-->
-<!--                    <option th:each="department : ${allDepartments}"-->
-<!--                            th:value="${department}"-->
-<!--                            th:text="${department}">-->
-<!--                    </option>-->
-<!--                </select>-->
-<!--            </div>-->
             <input type="submit" value="submit">
         </form>
         <h1 th:text="${poke}"></h1>
-<!--        <div>-->
-<!--            <ul>-->
-<!--                <li th:each="scientist : ${scientists}">-->
-<!--                    <span th:text="${scientist}"></span>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <div th:if="${condition}">-->
-<!--            <p>Condition is true</p>-->
-<!--        </div>-->
-<!--        <div th:unless="${condition}">-->
-<!--            <p>Condition is false</p>-->
-<!--        </div>-->
-<!--        <div th:switch="${role}">-->
-<!--            <p th:case="'admin'">User is an admin</p>-->
-<!--            <p th:case="'manager'">User is a manager</p>-->
-<!--            <p th:case="'*'">User is something else.</p>-->
-<!--        </div>-->
     </body>
     <footer>
         <div>

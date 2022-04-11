@@ -23,21 +23,11 @@ public class RootController {
 
 
         model.addAttribute("poke", orignal);
-
-        model.addAttribute("allDepartments", List.of("Service", "Admin", "Sales", "Security"));
         //attribute in the form
         model.addAttribute("pokemon", new Pokemon());
         //render simple text
         model.addAttribute("pageTitle", "The Jave Pokedex");
-        //if statements
-        model.addAttribute("condition", Boolean.FALSE);
-        //using switch
-        model.addAttribute("role", "manager");
-        //to render list
-        model.addAttribute("scientists", List.of("Albert Einstein",
-                "Niels Bohr",
-                "James Clerk Maxwell"));
-        System.out.println(orignal);
+
         return "index";
     }
 
