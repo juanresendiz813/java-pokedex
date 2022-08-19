@@ -1,0 +1,21 @@
+<div th:fragment="main-body">
+    <div class="container mx-auto px-6">
+        <div class="mt-16" >
+            <h3 class="text-gray-600 text-2xl font-medium md:text-center">Original 151 Pokemon</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6" >
+                <div style="margin-left:25%" th:each="p, index : ${poke}">
+                    <form action="#" th:name="name" th:action="@{/Pokemon(name=${p.name})}" method="post">
+                        <button type="submit" class=" hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                            <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden hover:bg-gray-200">
+                                <img class="flex items-end justify-end h-56 w-full bg-gray-400 hover:bg-gray-200 focus:outline-none focus:bg-gray-200" th:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+${index.count}+'.png'" />
+                                <div class="px-5 py-3 hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                                    <h3 class="text-gray-700 uppercase md:text-center" th:text="${p.name}"></h3>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

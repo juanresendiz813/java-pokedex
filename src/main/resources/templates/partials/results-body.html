@@ -1,0 +1,75 @@
+<div th:fragment="results">
+    <div class="container mx-auto px-6">
+        <div class="items-center">
+<!--    Image    -->
+            <div class="w-full h-64 lg:h-96 border-b-4 border-gray-500">
+                <img class="h-full w-full rounded-md object-cover max-w-lg mx-auto" th:src="${pokeStats.sprites.frontDefault}" th:alt="${pokeStats.sprites.frontDefault}">
+            </div>
+            <!--    Stats    -->
+            <div>
+<!--                Types -->
+                <div id="types" class="mt-2 border-b-4 border-slate-200">
+                    <label class="text-gray-700 text-2xl ">Type:</label>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="pl-20 mt-1" th:each="x : ${t}">
+                            <span class="text-gray-700 mx-2 text-lg" th:text="${x.name}"></span>
+                        </div>
+                    </div>
+                </div>
+<!--                Abilities -->
+                <div id="abilities" class="mt-2 border-b-4 border-slate-200">
+                    <label class="text-gray-700 text-2xl ">Abilities:</label>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="pl-20 mt-1" th:each="x : ${a}">
+                            <span class="text-gray-700 mx-2 text-lg" th:text="${x.name}"></span>
+                        </div>
+                    </div>
+                </div>
+<!--                Pictures    -->
+                <div id="pokepics" class="mt-2 border-b-4 border-slate-200">
+                    <label class="text-gray-700 text-2xl ">More Pokemon Pictures:</label>
+                    <div class="mt-2">
+                        <label class="text-gray-700 text-xl pl-10">Default Pokemon Pictures:</label>
+                        <div class="px-5 pt-5 flex justify-between items-start mt-1">
+                            <img class="h-1/2 w-1/2 rounded-md object-cover max-w-lg mx-auto" th:src="${pokeStats.sprites.frontDefault}" th:alt="${pokeStats.sprites.frontDefault}">
+                            <img class="h-1/2 w-1/2 rounded-md object-cover max-w-lg mx-auto" th:src="${pokeStats.sprites.backDefault}" th:alt="${pokeStats.sprites.backDefault}">
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <label class="text-gray-700 text-xl pl-10">Shiny Pokemon Pictures:</label>
+                        <div class="px-5 pt-5 flex justify-between items-start mt-1">
+                            <img class="h-1/2 w-1/2 rounded-md object-cover max-w-lg mx-auto" th:src="${pokeStats.sprites.frontShiny}" th:alt="${pokeStats.sprites.frontShiny}">
+                            <img class="h-1/2 w-1/2 rounded-md object-cover max-w-lg mx-auto" th:src="${pokeStats.sprites.backShiny}" th:alt="${pokeStats.sprites.backShiny}">
+                        </div>
+                    </div>
+                </div>
+<!--                Moves    -->
+                <div id="moves" class="mt-2 border-b-4 border-slate-200">
+                    <label class="text-gray-700 text-2xl ">Moves:</label>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="mt-1 pl-20" th:each="x : ${m}">
+                            <span class="text-gray-700 text-lg" th:text="${x.name}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16" id="more">
+            <h3 class="text-gray-600 text-2xl font-medium">Find More Pokemon</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6" >
+                <div style="margin-left:25%" th:each="rp : ${randPoke}">
+                    <form action="#" th:name="name" th:action="@{/Pokemon(name=${rp.name})}" method="post">
+                        <button type="submit" class=" hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                            <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden hover:bg-gray-200">
+                                <img class="flex items-end justify-end h-56 w-full bg-gray-400 hover:bg-gray-200 focus:outline-none focus:bg-gray-200" th:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+${rp.additionalProperties.rn}+'.png'" />
+                                <div class="px-5 py-3 hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                                    <h3 class="text-gray-700 uppercase md:text-center" th:text="${rp.name}"></h3>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

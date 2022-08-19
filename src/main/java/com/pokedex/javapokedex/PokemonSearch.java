@@ -17,6 +17,8 @@ public class PokemonSearch implements PokemonInterface{
     @Autowired
     public PokemonSearch(){return;}
 
+
+    //Returns 151 pokemon
     private List<Result> getLandingList(){
         final String uri = "https://pokeapi.co/api/v2/pokemon/?limit=151";
         RestTemplate restTemplate = new RestTemplate();
@@ -24,18 +26,48 @@ public class PokemonSearch implements PokemonInterface{
         pokeLandingList = orignal.getResults();
         return pokeLandingList;
     }
-
     public List<Result> landingList(){
         return getLandingList();
     }
 
+
+    //Returns searched pokemon
     private PokemonStats searchPokemon(Result name){
-        final String uri = "https://pokeapi.co/api/v2/pokemon/"+name.getName();
+        String ne = name.getName();
+        final String uri = "https://pokeapi.co/api/v2/pokemon/"+ne.toLowerCase(Locale.ROOT);
         RestTemplate restTemplate = new RestTemplate();
         PokemonStats pokemonStats = restTemplate.getForObject(uri, PokemonStats.class);
 
         return pokemonStats;
     }
-
     public PokemonStats getPokemon(Result name){return searchPokemon(name);}
+
+
+    //Returns 3 random pokemon
+    private List<Result> getRandomList(){
+        List<Result> lp = new ArrayList<Result>();
+        //Variables
+        Random random = new Random(152);
+        Pokemon p = new Pokemon();
+        List<Pokemon> pl = new ArrayList<>();
+
+        //loops to get results
+        for (int i = 0; i < 3; i++) {
+            int randomNumber = random.nextInt(151 );
+            String uri = "https://pokeapi.co/api/v2/pokemon/?offset="+randomNumber+"&limit=1";
+            RestTemplate restTemplate = new RestTemplate();
+            Pokemon orignal = restTemplate.getForObject(uri, Pokemon.class);
+            orignal.getResults().get(0).setAdditionalProperty("rn", randomNumber+1);
+            pl.add(orignal);
+        }
+        for (Pokemon e : pl) {
+            for (Result t : e.getResults()){
+                lp.add(t);
+            }
+        }
+        //returns results
+        return lp;
+    }
+    public List<Result> getRandomPokemon(){return getRandomList();}
+
 }

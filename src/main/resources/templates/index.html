@@ -8,89 +8,32 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 <body>
-<div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
+<div class="bg-white">
+<!--    header    -->
     <header>
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-                    Welcome to the Java Pokédex! This was made using Spring-boot & Thymeleaf!
-                </div>
-            </div>
-            <div class="relative mt-6 max-w-lg mx-auto">
-                <form th:action="@{/Pokemon}" method="post">
-                    <div>
-                        <div class="items-center mt-6">
-                            <label>Enter Pokemon Name:</label>
-                            <input th:field="*{pokemon.name}" id="crawlId" class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"  type="text" />
-                            <button class="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500" style="margin-left: 75%">Search -></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div >
+            <div th:replace="partials/main-header :: main-header"></div>
+        </div>
+        <div th:if="${partials.contains('results')}">
+            <div th:replace="partials/results-header :: results-header"></div>
         </div>
     </header>
+<!--    main content    -->
     <main class="my-8">
-        <div class="container mx-auto px-6">
-            <div class="mt-16" >
-                <h3 class="text-gray-600 text-2xl font-medium md:text-center">Original 151 Pokemon</h3>
-                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6" >
-                    <div style="margin-left:25%" th:each="p, index : ${poke}">
-                        <form action="#" th:name="name" th:action="@{/Pokemon(name=${p.name})}" method="post">
-                            <button type="submit">
-                                <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-                                    <img class="flex items-end justify-end h-56 w-full bg-cover" th:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+${index.count}+'.png'" />
-                                    <div class="px-5 py-3">
-                                        <h3 class="text-gray-700 uppercase md:text-center" th:text="${p.name}"></h3>
-                                    </div>
-                                </div>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div th:if="${partials.contains('landing')}">
+            <div th:replace="partials/main-body :: main-body "></div>
+        </div>
+        <div th:if="${partials.contains('results')}">
+            <div th:replace="partials/results-body :: results "></div>
         </div>
     </main>
-
-    <footer class="bg-gray-200">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400">Brand</a>
-            <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
-        </div>
-    </footer>
 </div>
 </body>
+<footer class="bg-gray-200">
+<!--    Footer    -->
+    <div th:replace="partials/main-footer :: foot"></div>
+</footer>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--    <head>-->
-<!--        <meta charset="UTF-8">-->
-<!--        <title>The Java Pokedex</title>-->
-<!--        <link rel="stylesheet" href="/css/main.css">-->
-<!--    </head>-->
-<!--    <body>-->
-<!--    <h1 th:text="${pageTitle}"></h1>-->
-<!--            <form th:action="@{/Pokemon}" method="post">-->
-<!--                <div>-->
-<!--                    <label>Enter Pokemon Name:</label>-->
-<!--                    <input th:field="*{pokemon.name}" id="crawlId" class="form-input w-full" type="text" />-->
-<!--                </div>-->
-<!--                <input type="submit" value="submit">-->
-<!--            </form>-->
-<!--    <div >-->
-<!--        <div th:each="p, index : ${poke}" class="bg-white overflow-hidden border-t border-l border-r border-gray-400 p-4 px-3 py-10 bg-gray-200 flex justify-center">-->
-<!--            <img th:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+${index.count}+'.png'">-->
-<!--            <h2 th:text="${p.name}"></h2>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    </body>-->
-<!--    <footer>-->
-<!--        <div>-->
-<!--            <div th:replace="base :: footer"></div>-->
-<!--        </div>-->
-<!--    </footer>-->
-<!--</html>-->
-
-
 
 
 
