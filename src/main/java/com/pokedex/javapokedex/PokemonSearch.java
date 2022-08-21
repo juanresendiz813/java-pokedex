@@ -52,13 +52,13 @@ public class PokemonSearch implements PokemonInterface{
     private List<Result> getRandomList(){
         List<Result> lp = new ArrayList<Result>();
         //Variables
-        Random random = new Random(152);
         Pokemon p = new Pokemon();
         List<Pokemon> pl = new ArrayList<>();
 
         //loops to get results
         for (int i = 0; i < 3; i++) {
-            int randomNumber = random.nextInt(151 );
+            Random random = new Random();
+            int randomNumber = random.nextInt(151 - 1) + 1;
             String uri = "https://pokeapi.co/api/v2/pokemon/?offset="+randomNumber+"&limit=1";
             RestTemplate restTemplate = new RestTemplate();
             Pokemon orignal = restTemplate.getForObject(uri, Pokemon.class);
