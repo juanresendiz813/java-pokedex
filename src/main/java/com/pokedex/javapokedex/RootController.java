@@ -35,29 +35,39 @@ public class RootController {
     }
 
     @RequestMapping(value = "/Pokemon", method = {RequestMethod.POST})
-    public String pokemon(@ModelAttribute("pokemon") Result name, BindingResult userBindingResult, RedirectAttributes attributes) {
+    public String pokemon(@ModelAttribute("pokemon") Result name, BindingResult userBindingResult, RedirectAttributes attributes) throws Exception {
         PokemonStats pokemonStats = pi.getPokemon(name);
         List<Result> q = pi.getRandomPokemon();
-        List<Type__1> type__1 = new ArrayList<>();
-        for (Type e : pokemonStats.getTypes()){
-            type__1.add(e.getType());
+        if (pokemonStats.getId() != null) {
+//            List<Result> q = pi.getRandomPokemon();
+            List<Type__1> type__1 = new ArrayList<>();
+            for (Type e : pokemonStats.getTypes()){
+                type__1.add(e.getType());
+            }
+            List<Ability__1> ability__1 = new ArrayList<>();
+            for (Ability e : pokemonStats.getAbilities()){
+                ability__1.add(e.getAbility());
+            }
+            List<Move__1> move__1 = new ArrayList<>();
+            for (Move e : pokemonStats.getMoves()){
+                move__1.add(e.getMove());
+            }
+            attributes.addFlashAttribute("partials", "results");
+            attributes.addFlashAttribute("t", type__1);
+            attributes.addFlashAttribute("a", ability__1);
+            attributes.addFlashAttribute("m", move__1);
+
+
+        } else {
+            attributes.addFlashAttribute("partials", "noPoke");
+            attributes.addFlashAttribute("poke", pi.landingList());
         }
-        List<Ability__1> ability__1 = new ArrayList<>();
-        for (Ability e : pokemonStats.getAbilities()){
-            ability__1.add(e.getAbility());
-        }
-        List<Move__1> move__1 = new ArrayList<>();
-        for (Move e : pokemonStats.getMoves()){
-            move__1.add(e.getMove());
-        }
-        attributes.addFlashAttribute("partials", "results");
+
         attributes.addFlashAttribute("pokeStats", pokemonStats);
-        attributes.addFlashAttribute("pageTitle", "The Jave Pokedex");
-        attributes.addFlashAttribute("t", type__1);
-        attributes.addFlashAttribute("a", ability__1);
-        attributes.addFlashAttribute("m", move__1);
-        attributes.addFlashAttribute("pokemon", new Result());
         attributes.addFlashAttribute("randPoke", q);
+        attributes.addFlashAttribute("pageTitle", "The Jave Pokedex");
+        attributes.addFlashAttribute("pokemon", new Result());
+
         return "redirect:/";
     }
 

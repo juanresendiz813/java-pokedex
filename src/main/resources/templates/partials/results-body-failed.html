@@ -1,0 +1,13 @@
+<div th:fragment="failed">
+    <div class="w-full text-gray-700 md:text-center text-4xl font-semibold" th:text="${#strings.toUpperCase(pokeStats.name)}"></div>
+    <div class="container mx-auto px-6">
+        <div class="items-center  ">
+            <p class="text-xl text-center">
+                The pokémon name you typed doesn't exist. Maybe it's a spelling error?
+            </p>
+        </div>
+        <div>
+            <div th:replace="partials/results-footer :: results-footer "></div>
+        </div>
+    </div>
+</div>

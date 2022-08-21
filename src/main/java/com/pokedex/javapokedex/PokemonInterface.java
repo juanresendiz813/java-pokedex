@@ -8,6 +8,6 @@ import java.util.List;
 public interface PokemonInterface {
     List<Result> getRandomPokemon();
     List<Result> landingList();
-    PokemonStats getPokemon(Result name);
+    PokemonStats getPokemon(Result name) throws Exception;
 
 }

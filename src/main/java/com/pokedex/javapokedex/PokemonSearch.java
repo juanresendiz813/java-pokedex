@@ -32,15 +32,20 @@ public class PokemonSearch implements PokemonInterface{
 
 
     //Returns searched pokemon
-    private PokemonStats searchPokemon(Result name){
+    private PokemonStats searchPokemon(Result name) throws Exception{
         String ne = name.getName();
         final String uri = "https://pokeapi.co/api/v2/pokemon/"+ne.toLowerCase(Locale.ROOT);
         RestTemplate restTemplate = new RestTemplate();
-        PokemonStats pokemonStats = restTemplate.getForObject(uri, PokemonStats.class);
-
-        return pokemonStats;
+        try {
+            PokemonStats pokemonStats = restTemplate.getForObject(uri, PokemonStats.class);
+            return pokemonStats;
+        } catch (Exception e){
+            PokemonStats pokemonStats = new PokemonStats();
+            pokemonStats.setName(ne);
+            return pokemonStats;
+        }
     }
-    public PokemonStats getPokemon(Result name){return searchPokemon(name);}
+    public PokemonStats getPokemon(Result name) throws Exception {return searchPokemon(name);}
 
 
     //Returns 3 random pokemon

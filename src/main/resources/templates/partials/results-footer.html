@@ -1,0 +1,19 @@
+<div th:fragment="results-footer">
+    <div class="mt-16" id="more">
+        <h3 class="text-gray-600 text-2xl font-medium">Find More Pokemon</h3>
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6" >
+            <div style="margin-left:25%" th:each="rp : ${randPoke}">
+                <form action="#" th:name="name" th:action="@{/Pokemon(name=${rp.name})}" method="post">
+                    <button type="submit" class=" hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                        <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden hover:bg-gray-200">
+                            <img class="flex items-end justify-end h-56 w-full bg-gray-400 hover:bg-gray-200 focus:outline-none focus:bg-gray-200" th:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+${rp.additionalProperties.rn}+'.png'" />
+                            <div class="px-5 py-3 hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                                <h3 class="text-gray-700 uppercase md:text-center" th:text="${rp.name}"></h3>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

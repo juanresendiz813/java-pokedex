@@ -26,6 +26,9 @@
         <div th:if="${partials.contains('results')}">
             <div th:replace="partials/results-body :: results "></div>
         </div>
+        <div th:if="${partials.contains('noPoke')}">
+            <div th:replace="partials/results-body-failed :: failed "></div>
+        </div>
     </main>
 </div>
 </body>
