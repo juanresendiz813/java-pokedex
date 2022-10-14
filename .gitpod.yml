@@ -1,8 +1,8 @@
 tasks:
   - init: mvn spring-boot:run
 ports:
-  - port: 8081
-    onOpen: open-preview
+  - port: 8080
+    onOpen: open-browser
 github:
   prebuilds:
     # enable for the default branch (defaults to true)
