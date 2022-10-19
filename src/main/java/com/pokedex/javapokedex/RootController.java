@@ -34,6 +34,43 @@ public class RootController {
         return "index";
     }
 
+    @PostMapping(value = "/Pokemon", headers = "HX-Request")
+	public String htmxPokemon(@ModelAttribute("pokemon") Result name, BindingResult userBindingResult, RedirectAttributes attributes) throws Exception {
+
+		PokemonStats pokemonStats = pi.getPokemon(name);
+        List<Result> q = pi.getRandomPokemon();
+        if (pokemonStats.getId() != null) {
+            List<Type__1> type__1 = new ArrayList<>();
+            for (Type e : pokemonStats.getTypes()){
+                type__1.add(e.getType());
+            }
+            List<Ability__1> ability__1 = new ArrayList<>();
+            for (Ability e : pokemonStats.getAbilities()){
+                ability__1.add(e.getAbility());
+            }
+            List<Move__1> move__1 = new ArrayList<>();
+            for (Move e : pokemonStats.getMoves()){
+                move__1.add(e.getMove());
+            }
+            attributes.addFlashAttribute("partials", "results");
+            attributes.addFlashAttribute("t", type__1);
+            attributes.addFlashAttribute("a", ability__1);
+            attributes.addFlashAttribute("m", move__1);
+
+
+        } else {
+            attributes.addFlashAttribute("partials", "noPoke");
+            attributes.addFlashAttribute("poke", pi.landingList());
+        }
+
+        attributes.addFlashAttribute("pokeStats", pokemonStats);
+        attributes.addFlashAttribute("randPoke", q);
+        attributes.addFlashAttribute("pageTitle", "The Jave Pokedex");
+        attributes.addFlashAttribute("pokemon", new Result());
+
+        return "redirect:/";
+	}
+
     @RequestMapping(value = "/Pokemon", method = {RequestMethod.POST})
     public String pokemon(@ModelAttribute("pokemon") Result name, BindingResult userBindingResult, RedirectAttributes attributes) throws Exception {
         PokemonStats pokemonStats = pi.getPokemon(name);

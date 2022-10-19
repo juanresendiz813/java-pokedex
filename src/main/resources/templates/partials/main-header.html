@@ -5,16 +5,6 @@
                 Welcome to the Java Pokédex! This was made using Spring-boot & Thymeleaf!
             </div>
         </div>
-        <div class="relative mt-6 max-w-lg mx-auto">
-            <form th:action="@{/Pokemon}" method="post">
-                <div>
-                    <div class="items-center mt-6">
-                        <label>Enter Pokemon Name:</label>
-                        <input th:field="*{pokemon.name}" id="crawlId" class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"  type="text" />
-                        <button class="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500" style="margin-left: 75%">Search -></button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    
     </div>
 </div>
